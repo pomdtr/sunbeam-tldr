@@ -7,8 +7,7 @@
 ## Install
 
 ```bash
-curl -L https://raw.githubusercontent.com/pomdtr/sunbeam/main/docs/examples/tldr/tldr.bash > ~/.local/bin/sunbeam-tldr
-chmod +x ~/.local/bin/sunbeam-tldr
+sunbeam extension install https://github.com/pomdtr/sunbeam-tldr
 ```
 
 ## Usage
