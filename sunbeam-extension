@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # shellcheck disable=SC2016
 
 # This script is an example of how to use tldr with sunbeam
-set -euo pipefail
+set -e
 
 # check if tldr is installed
-if ! command -v tldr &> /dev/null; then
+if ! command -v tldr >/dev/null 2>&1; then
     echo "tldr is not installed"
     exit 1
 fi
@@ -26,7 +26,7 @@ exit 0
 fi
 
 # extract command name
-COMMAND=$(sunbeam query -r '.command' <<< "$1")
+COMMAND=$(echo "$1" | sunbeam query -r '.command')
 # handle commands
 if [ "$COMMAND" = "list" ]; then
     tldr --list | sunbeam query -R '{
@@ -40,7 +40,7 @@ if [ "$COMMAND" = "list" ]; then
             items: .
         }'
 elif [ "$COMMAND" = "view" ]; then
-    PAGE=$(sunbeam query -r '.params.page' <<< "$1")
+    PAGE=$(echo "$1" | sunbeam query -r '.params.page')
     tldr --raw "$PAGE" | sunbeam query --arg page="$PAGE" -sR '{
             type: "detail", text: ., language: "markdown", actions: [
                 {title: "Copy Page", onAction: {type: "copy", text: ., exit: true}},
