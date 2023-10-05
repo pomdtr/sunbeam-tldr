@@ -9,6 +9,7 @@ if [ $# -eq 0 ]; then
     sunbeam query -n '
 {
     title: "TLDR",
+    root: "list",
     # each command can be called through the cli
     commands: [
         { name: "list", mode: "view", title: "Search Pages" },
