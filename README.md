@@ -13,6 +13,6 @@ sunbeam extension install https://github.com/pomdtr/sunbeam-tldr
 ## Usage
 
 ```bash
-sunbeam tldr
-sunbeam tldr view --page tldr
+sunbeam tldr list # List all pages
+sunbeam tldr view --page tldr # View a page
 ```
