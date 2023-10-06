@@ -42,7 +42,7 @@ if [ "$COMMAND" = "list" ]; then
 elif [ "$COMMAND" = "view" ]; then
     PAGE=$(echo "$INPUT" | sunbeam query -r '.params.page')
     tldr --raw "$PAGE" | sunbeam query --arg page="$PAGE" -sR '{
-            type: "detail", text: ., language: "markdown", actions: [
+            type: "detail", markdown: ., actions: [
                 {title: "Copy Page", onAction: {type: "copy", text: ., exit: true}},
                 {title: "Copy Command", key: "c", onAction: {type: "copy", text: $page, exit: true}}
             ]
