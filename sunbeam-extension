@@ -5,7 +5,7 @@
 set -e
 
 # if no arguments are passed, return the extension's manifest
-if [ $# -eq 0 ]; then
+if [ $# -eq 1 ] && [ "$1" = "manifest" ]; then
     sunbeam query -n '
 {
     title: "TLDR",
@@ -24,8 +24,9 @@ if ! command -v tldr >/dev/null 2>&1; then
     exit 1
 fi
 
+INPUT=$(cat)
 # extract command name
-COMMAND=$(echo "$1" | sunbeam query -r '.command')
+COMMAND=$(echo "$INPUT" | sunbeam query -r '.command')
 # handle commands
 if [ "$COMMAND" = "list" ]; then
     tldr --list | sunbeam query -R '{
@@ -39,7 +40,7 @@ if [ "$COMMAND" = "list" ]; then
             items: .
         }'
 elif [ "$COMMAND" = "view" ]; then
-    PAGE=$(echo "$1" | sunbeam query -r '.params.page')
+    PAGE=$(echo "$INPUT" | sunbeam query -r '.params.page')
     tldr --raw "$PAGE" | sunbeam query --arg page="$PAGE" -sR '{
             type: "detail", text: ., language: "markdown", actions: [
                 {title: "Copy Page", onAction: {type: "copy", text: ., exit: true}},
