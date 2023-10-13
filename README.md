@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-sunbeam extension install https://github.com/pomdtr/sunbeam-tldr
+sunbeam extension install github:pomdtr/sunbeam-tldr
 ```
 
 ## Usage
